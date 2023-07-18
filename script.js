@@ -88,6 +88,7 @@ const posts = [
 
 let template = "";
 
+// FUNZIONE CHE STAMPA I DATI DEGLI OBJECTS IN HTML
 posts.forEach(stampaPost);
 
 function stampaPost(item, index) {
@@ -105,7 +106,10 @@ function stampaPost(item, index) {
                 </div>
                 <div class="post-meta__data">
                     <div class="post-meta__author">${posts[index].author.name}</div>
-                    <div class="post-meta__time">${posts[index].created}</div> 
+                    <div class="post-meta__time">${posts[index].created
+                    .split("-")
+                    .reverse()
+                    .join("-")}</div>
                 </div>                    
             </div>
         </div>
@@ -131,3 +135,4 @@ function stampaPost(item, index) {
 
     document.getElementById("container").innerHTML += template;
 }
+
