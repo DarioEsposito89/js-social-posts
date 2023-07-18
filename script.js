@@ -97,6 +97,7 @@ function stampaPost(item, index) {
     if (replaceImage === null) {
         replacedImage = posts[index].author.name
     }
+    
     template = `
     <div class="post" id="${posts[index].id}">
         <div class="post__header">
@@ -136,3 +137,39 @@ function stampaPost(item, index) {
     document.getElementById("container").innerHTML += template;
 }
 
+// TOGGLE CLICK  AUMENTA E DIMINUISCE CONTATORE DEL MI PIACE E INSERISCE/TOGLIE ID DEL POST DA UN SECONDO ARRAY"
+
+let likeButtonsCollection = document.getElementsByClassName("like-button");
+let likeButtonsArray = [...likeButtonsCollection];
+const likedPosts = [];
+
+likeButtonsArray.forEach(pressButton);
+
+function pressButton(items, index) {
+    
+    likeButtonsArray[index].addEventListener("click", (event) => {
+        let postsId = "Id post: " + (index + 1);
+        let numeroLikes = document.getElementById(`like-counter-${index + 1}`);
+        likeButtonsArray[index].classList.add("like-button--liked");
+
+        if (numeroLikes.innerText == posts[index].likes) {
+            numeroLikes.innerText = parseInt(numeroLikes.innerText) + 1;
+            if (!likedPosts.includes(postsId)) {
+                likedPosts.push(postsId);
+                console.log(likedPosts);
+            }
+        } else if (numeroLikes.innerText == posts[index].likes + 1) {
+            likeButtonsArray[index].classList.remove("like-button--liked");
+            numeroLikes.innerText = parseInt(numeroLikes.innerText) - 1;
+            if (likedPosts.includes(postsId)) {
+                for (let i = 0; i < likedPosts.length; i++) {
+                    if (likedPosts[i].split(" ")[2] == index + 1) {
+                        likedPosts.splice(i, 1);
+                    }
+                }
+
+                console.log(likedPosts);
+            }
+        }
+    });
+}
