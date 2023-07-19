@@ -110,7 +110,7 @@ function stampaPost(item, index) {
                     <div class="post-meta__time">${posts[index].created
                     .split("-")
                     .reverse()
-                    .join("-")}</div>
+                    .join("/")}</div>
                 </div>                    
             </div>
         </div>
